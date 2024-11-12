@@ -1,6 +1,6 @@
 import pygame
-import customtkinter as ctk
-from tkinter import Listbox, END
+import customtkinter as ctk   
+from tkinter import Listbox, END , TclError
 
 
 app = ctk.CTk()
@@ -26,16 +26,42 @@ song_listbox.pack(pady=20)
 #DEF
 
 def play_music():
-    pass
+    global current_song
+    try:
+        selected_song = song_listbox.get(song_listbox.curselection())
+        pygame.mixer.music.load(selected_song)
+        pygame.mixer.music.play()
+        current_song = selected_song
+    except TclError:
+        print("no song selected")    
 
 def stop_music():
-    pass
+    pygame.mixer.music.stop()
+    global current_song
+    current_song = ""
 
 def next_song():
-    pass
+    try:
+        current_index = song_listbox.curselection()[0]
+    except IndexError:
+        current_index = -1
+    next_index = (current_index + 1) % song_listbox.size()
+    song_listbox.selection_clear(0, END)
+    song_listbox.select_set(next_index)
+    song_listbox.event_generate("<<ListboxSelect>>")
+    play_music()
 
+    
 def previous_song():
-    pass
+    try:
+        current_index = song_listbox.curselection()[0]
+    except IndexError:
+        current_index = -1
+    next_index = (current_index + 1) % song_listbox.size()
+    song_listbox.selection_clear(0, END)
+    song_listbox.select_set(next_index)
+    song_listbox.event_generate("<<ListboxSelect>>")
+    play_music()
 
 
 #btn
