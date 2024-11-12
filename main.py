@@ -76,4 +76,15 @@ next_button.pack(pady=5)
 prev_button = ctk.CTkButton(app, text="previous",fg_color="#603d6e",hover_color="#846262",  command=previous_song)
 prev_button.pack(pady=5)
 
+#LABEL
+
+song_label = ctk.CTkLabel(app, text="", font=("Helvetica",  12, "bold"))
+song_label.pack(pady=10)
+
+#Slider Volum
+
+volume_slider = ctk.CTkSlider(app, from_=0, to=1, command=set_volume)
+volume_slider.set(volume) 
+volume_slider.pack(pady=20)
+
 app.mainloop() 
