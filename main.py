@@ -30,6 +30,8 @@ def play_music():
         pygame.mixer.music.load(selected_song)
         pygame.mixer.music.play()
         current_song = selected_song
+        update_song_label()
+        app.after(int(pygame.mixer.Sound(selected_song).get_length() * 1000), next_song) 
     except TclError:
            print("no song selected")
 
@@ -37,6 +39,7 @@ def stop_music():
     pygame.mixer.music.stop()
     global current_song
     current_song = ""
+    update_song_label()
 
 def next_song():
     try:
@@ -61,6 +64,13 @@ def previous_song():
     song_listbox.event_generate("<<ListboxSelect>>")
     play_music()
 
+def set_volume(val):
+    global volume
+    volume = float(val)  
+    pygame.mixer.music.set_volume(volume)
+
+def update_song_label():
+    song_label.configure(text=f"is playing: {current_song}")
 
 #btn
 
