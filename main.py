@@ -63,7 +63,10 @@ def previous_song():
     song_listbox.event_generate("<<ListboxSelect>>")
     play_music()
 
-
+def set_volume(val):
+    global volume
+    volume = float(val)  # تبدیل به عدد اعشاری
+    pygame.mixer.music.set_volume(volume)
 #btn
 
 play_button = ctk.CTkButton(app, text="play",fg_color="#603d6e",hover_color="#846262",  command=play_music)
@@ -77,5 +80,10 @@ next_button.pack(pady=5)
 
 prev_button = ctk.CTkButton(app, text="previous",fg_color="#603d6e",hover_color="#846262",  command=previous_song)
 prev_button.pack(pady=5)
+
+
+#LABEL
+
+
 
 app.mainloop() 
