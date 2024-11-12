@@ -1,13 +1,26 @@
 import pygame
 import customtkinter as ctk
-
-
-pygame.mixer.init()
+from tkinter import Listbox, END
 
 
 app = ctk.CTk()
 app.title("music player")
 app.geometry("400x500")
+
+
+pygame.mixer.init()
+
+
+current_song = ""
+volume = 0
+
+
+
+songs = ["music/Reza-Bahram.mp3", "music/Reza.b-kash.mp3", "music/Shaho.h-Disan.mp3", "music/Amin Rostami Joonam.mp3", "music/Reza Bahram Hame Raftand.mp3"]
+song_listbox = Listbox(app)
+for song in songs:
+    song_listbox.insert(END, song)
+song_listbox.pack(pady=20)
 
 
 #DEF
